@@ -31,6 +31,7 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
         * Does game rating (The average rating of both players in a game) have an effect on upsets?
         * Does time block effect upsets?
         * Does a game being rated effect upsets?
+        * Does choice of oppening effect upsets?
 
 * Develop a Model to predict if a chess game will end in an upset 
     * Use drivers identified in explore to build predictive models of different types 
@@ -58,6 +59,6 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
 
 # Steps to Reproduce 
 1) Clone this repo.
-2) Acquire the data from Kaggle at https://www.kaggle.com/datasnaek/chess.
+2) Acquire the data from [Kaggle](https://www.kaggle.com/datasnaek/chess)
 3) Put the data in the file containing the cloned repo.
 4) Run notebook.
