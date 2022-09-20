@@ -2,11 +2,11 @@
 
 # Project Description 
 
-Chess is widely renowned as one of the most skill intensive games ever invented. Both sides begin the game with identical pieces in an identical position, there are no random elements (aside from assigning the first move), and the movement of those pieces during a game can result in over 121 million possible combinations in just the fist three moves. Because of this, a player who is more skilled should win the grand majority of chess games. For this reason,  I have decided to look into the different elements of chess games to determine if any of them increase or decrease the chance of a player with lower skill defeating a player with greater skill.
+Chess is widely renowned as one of the most skill intensive games ever invented. Both sides begin the game with identical pieces in an identical position, there are no random elements (aside from assigning the first move), and the movement of those pieces during a game can result in over 121 million possible combinations in just the fist three moves. Because of this, the player with the most skill is likely to win the grand majority of chess games. I have decided to look into the different elements of a chess game to determine if any of them increase or decrease the chance of a player with lower skill defeating a player with greater skill.
 
 # Project Goal
 
-Discover drivers of upsets in chess games played on Lichess.org, and use those drivers to develop a machine learning model to predict whether a given game would end in upset. An upset is defined as a lower rated player defeating a higher rated player. This information could be used to further our understanding of which game elements contribute to or detract from a game’s skill intensity.
+Discover drivers of upsets in chess games played on Lichess.org, and use those drivers to develop a machine learning model to predict whether a given game will end in upset. An upset is defined as a lower rated player defeating a higher rated player. This information could be used to further our understanding of which game elements contribute to or detract from a game’s skill intensity.
 
 # Initial thoughts
 
@@ -16,7 +16,16 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
 
 * Aquire data from Kaggle
 * Prepare data
+    * Create Engineered columns from existing data
+    * upset
+    * rating_difference
+    * game_rating
+    * lower_rated_white
+    * time_control_group
 * Explore data in search of drivers of upsets
+    * Answer the following questions
+    *
+
 * Use drivers identified in explore to build different models
 * Select the best model
 * Draw conclusions
