@@ -15,19 +15,29 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
 # The Plan
 
 * Aquire data from Kaggle
+
 * Prepare data
     * Create Engineered columns from existing data
-    * upset
-    * rating_difference
-    * game_rating
-    * lower_rated_white
-    * time_control_group
+        * upset
+        * rating_difference
+        * game_rating
+        * lower_rated_white
+        * time_control_group
+
 * Explore data in search of drivers of upsets
     * Answer the following questions
-    *
+        * How often do upsets occur?
+        * Dose first move advantage effect upsets?
+        * Does game rating (The average rating of both players in a game) have an effect on upsets?
+        * Does time block effect upsets?
+        * Does a game being rated effect upsets?
 
-* Use drivers identified in explore to build different models
-* Select the best model
+* Develop a Model to predict if a chess game will end in an upset 
+    * Use drivers identified in explore to build predictive models of different types 
+    * Evaluate tode models on train and validate data
+    * Select the best model based on highest accuracy 
+    * Evaluate the best model on test data
+
 * Draw conclusions
 
 # Data Dictionary
