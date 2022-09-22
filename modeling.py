@@ -33,26 +33,7 @@ def model_prep(train,validate,test):
     test_X = test.drop(columns='upset').reset_index(drop=True)
     test_y = test[['upset']].reset_index(drop=True)
 
-    # Scaling continuous variables
-    cols_to_scale = ['rating_difference']
-
-    # create df's for train validate and test with only columns that need to be scaled
-    train_to_be_scaled = train_X[cols_to_scale]
-    validate_to_be_scaled = validate_X[cols_to_scale]
-    test_to_be_scaled = test_X[cols_to_scale]
-
-    # create scaler object and fit that object on the train data
-    scaler = sklearn.preprocessing.MinMaxScaler().fit(train_to_be_scaled)
-
-    # transform data into an array using the scaler object 
-    train_scaled = scaler.transform(train_to_be_scaled)
-    validate_scaled = scaler.transform(validate_to_be_scaled)
-    test_scaled = scaler.transform(test_to_be_scaled)
-
-    # transform data into a dataframe
-    train_scaled = pd.DataFrame(train_scaled, columns = cols_to_scale)
-    validate_scaled = pd.DataFrame(validate_scaled, columns = cols_to_scale)
-    test_scaled = pd.DataFrame(test_scaled, columns = cols_to_scale)
+   
 
     # drop corresponding unscaled columns from original dataframes and reset the index
     train_X = train_X.drop(columns = cols_to_scale)

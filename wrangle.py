@@ -9,7 +9,7 @@ import re
 from sklearn.model_selection import train_test_split
 import sklearn.preprocessing
 
-####################################Acquire and Prep##################################################
+#################################################################Acquire Main Function#################################################################
 
 def wrangle_chess_data(reprep = False):
     ''' Aquires and Prepares data for project'''
@@ -36,14 +36,14 @@ def wrangle_chess_data(reprep = False):
         # adding derived features
         df = add_features(df)
 
-        df = df[['time_control_group','opening_name']].join(pd.get_dummies(df,columns=['time_control_group','opening_name']))
+        df = df[['time_control_group']].join(pd.get_dummies(df,columns=['time_control_group']))
 
         # saving to csv
         df.to_csv('chess_games_prepared.csv', index = False)
 
     return pd.read_csv('chess_games_prepared.csv')
 
-####################################Trian Validate Test Split########################################
+####################################Trian Validate Test Split#######################################################################
 
 def split_my_data(df):
     '''Splits data into train, validate, and test data'''
@@ -54,7 +54,46 @@ def split_my_data(df):
 
     return train, validate, test
 
-########################################Feature Engineering##############################################
+######################################################Scaling##########################################################################
+
+def scale_data(train, validate, test):
+
+    # Scaling continuous variables
+    cols_to_scale = ['rating_difference', 'game_rating']
+
+    # create df's for train validate and test with only columns that need to be scaled
+    train_to_be_scaled = train[cols_to_scale]
+    validate_to_be_scaled = validate[cols_to_scale]
+    test_to_be_scaled = test[cols_to_scale]
+
+    # create scaler object and fit that object on the train data
+    scaler = sklearn.preprocessing.MinMaxScaler().fit(train_to_be_scaled)
+
+    # transform data into an array using the scaler object 
+    train_scaled = scaler.transform(train_to_be_scaled)
+    validate_scaled = scaler.transform(validate_to_be_scaled)
+    test_scaled = scaler.transform(test_to_be_scaled)
+
+    # transform data into a dataframe
+    train_scaled = pd.DataFrame(train_scaled, columns = cols_to_scale)
+    validate_scaled = pd.DataFrame(validate_scaled, columns = cols_to_scale)
+    test_scaled = pd.DataFrame(test_scaled, columns = cols_to_scale)
+
+    # add _scaled to each column name in the scaled data
+    for col in cols_to_scale:
+
+        train_scaled = train_scaled.rename(columns={col: col + "_scaled"})
+        validate_scaled = validate_scaled.rename(columns={col: col + "_scaled"})
+        test_scaled = test_scaled.rename(columns={col: col + "_scaled"})
+
+    # add scaled columns to their original dataframes
+    train = train.join(train_scaled)
+    validate = validate.join(validate_scaled)
+    test = test.join(test_scaled)
+
+    return train, validate, test
+
+########################################Feature Engineering###########################################################################
 
 def get_time_block(value):
     '''convert time code to time in minutes'''
