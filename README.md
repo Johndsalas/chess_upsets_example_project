@@ -41,7 +41,7 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
 * Draw conclusions
  
 # Data Dictionary
- 
+
 | Feature | Definition |
 |:--------|:-----------|
 |Rated| True or False, The game's result is reflected in each player's rating|
@@ -54,7 +54,7 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
 |Opening Name| The name of the opening played in the game|
 |Time Control Group| The amount of time allotted to each player to make their moves, **Standard** (60 min or more), **Rapid** (30 - 15 min), **Blitz** (5 - 3 min), or **Bullet** (2 or less), **Other** (any other time limit)|
 |Upset (Target)| True or False, The lower rated player won the game|
-|Additional Features|Encoded values for 'Time Control Group' and 'Opening Name'|
+|Additional Features|Encoded and values for categorical data and scaled versions continuous data|
  
 # Steps to Reproduce
 1) Clone this repo.
