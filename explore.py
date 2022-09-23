@@ -3,6 +3,8 @@ import seaborn as sns
 import pandas as pd
 from scipy import stats
 
+#################################################Exploration Data Visuals and Satatistical tests######################################################## 
+
 def get_pie_upsets(train):
     '''get pie chart for percent of upsets'''
 
@@ -14,6 +16,7 @@ def get_pie_upsets(train):
     plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#ffc3a0', '#c0d6e4'])
     plt.title('Games Ending in Upsets Represent 1/3 of the train data')
     plt.show()
+
 
 def get_pies_white(train):
     "create pie charts showing upset percentage for having and not having the first move"
@@ -41,6 +44,7 @@ def get_pies_white(train):
     plt.tight_layout()
     plt.show()
 
+
 def get_chi_white(train):
     '''get rusults of chi-square for lower_rated_white and upsets'''
 
@@ -50,6 +54,7 @@ def get_chi_white(train):
 
     print(f'chi^2 = {chi2:.4f}')
     print(f'p     = {p:.4f}')
+
 
 def get_pie_rated(train):
     '''get pie charts showing the percentage of upsets for games being rated on not being rated'''
@@ -77,6 +82,7 @@ def get_pie_rated(train):
     plt.tight_layout
     plt.show()
 
+
 def get_chi_rated(train):
     '''get result of chi-square for rated and upset'''
 
@@ -85,6 +91,7 @@ def get_chi_rated(train):
 
     print(f'chi^2 = {chi2:.4f}')
     print(f'p     = {p:.4f}')
+
 
 def get_game_rating(train):
     " get graph of game rating for upsets and non-upsets"
@@ -99,6 +106,7 @@ def get_game_rating(train):
     plt.tight_layout()
     plt.show()
 
+
 def ave_diff_rating(train):
     " get graph of game mean rating_difference for upsets and non-upsets"
 
@@ -111,6 +119,7 @@ def ave_diff_rating(train):
     plt.title('The Mean Difference in Player Rating is Much Smaller in Upsets than in Non-upsets')
     plt.tight_layout()
     plt.show()
+
 
 def get_t_rating_diff(train):
     "get t-test for mean rating difference in upsets and non-upsets"
@@ -142,6 +151,7 @@ def get_pie_time(train):
     plt.tight_layout()
     plt.show()
 
+
 def get_chi_time(train):
     ''' get chi-square for upset and time control group'''
 
@@ -150,6 +160,7 @@ def get_chi_time(train):
 
     print(f'chi^2 = {chi2:.4f}')
     print(f'p     = {p:.4f}')
+
 
 def get_pie_open(train):
     '''get pie chart of upset percentage for the top ten openings in the train date by popularity'''
@@ -163,14 +174,18 @@ def get_pie_open(train):
     # generate graphs and assign them to subplots
     for name, ax in zip(names, axs.ravel()):
         
-        values = [len(train.upset[(train.upset == True) & (train.opening_name == name)]), len(train.upset[(train.upset == False) & (train.opening_name == name)])] 
+        values = [len(train.upset[(train.upset == True) & (train.opening_name == name)]), 
+                  len(train.upset[(train.upset == False) & (train.opening_name == name)])] 
+
         labels = ['Upset','Non-Upset'] 
+
         ax.pie(values, labels=labels, autopct='%.0f%%', colors=['#ffc3a0', '#c0d6e4'])
         ax.set_title(f'{name}')
            
     # display chart
     plt.tight_layout()
     plt.show()
+
 
 def get_chi_open(train):
     '''get chi-square for opening name and upset'''

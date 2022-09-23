@@ -52,6 +52,10 @@ def split_my_data(df):
 
     train, validate =  train_test_split(train_validate, test_size=.3, random_state=123, stratify=train_validate.upset)
 
+    train.reset_index(drop=True, inplace=True)
+    validate.reset_index(drop=True, inplace=True)
+    test.reset_index(drop=True, inplace=True)
+
     return train, validate, test
 
 ######################################################Scaling##########################################################################

@@ -11,17 +11,15 @@ def model_prep(train,validate,test):
     '''Prepare train, validate, and test data for modeling'''
 
     # drop unused columns 
-    drop_cols = ['time_control_group',
-                 'opening_name',
-                 'winning_pieces',
-                 'increment_code',
-                 'white_rating',
-                 'black_rating',
-                 'game_rating',]
+    keep_cols = ['lower_rated_white',
+                 'rated',
+                 'time_control_group_Standard',
+                 'rating_difference_scaled',
+                 'upset']
 
-    train = train.drop(columns=drop_cols)
-    validate = validate.drop(columns=drop_cols)
-    test = test.drop(columns=drop_cols)
+    train = train[keep_cols]
+    validate = validate[keep_cols]
+    test = test[keep_cols]
     
     # Split data into predicting variables (X) and target variable (y) and reset the index for each dataframe
     train_X = train.drop(columns='upset').reset_index(drop=True)
@@ -32,18 +30,6 @@ def model_prep(train,validate,test):
 
     test_X = test.drop(columns='upset').reset_index(drop=True)
     test_y = test[['upset']].reset_index(drop=True)
-
-   
-
-    # drop corresponding unscaled columns from original dataframes and reset the index
-    train_X = train_X.drop(columns = cols_to_scale)
-    validate_X = validate_X.drop(columns = cols_to_scale)
-    test_X = test_X.drop(columns = cols_to_scale)
-
-    # add scaled columns to their original dataframes
-    train_X = train_X.join(train_scaled)
-    validate_X = validate_X.join(validate_scaled)
-    test_X = test_X.join(test_scaled)
 
     # manual encoding
     train_X['rated'] = train_X.rated.apply(lambda value: 1 if value == True else 0)
@@ -73,7 +59,7 @@ def get_forest(train_X, validate_X, train_y, validate_y):
     '''get random forest accuracy on train and validate data'''
 
     # create model object and fit it to training data
-    rf = RandomForestClassifier(max_depth=9, random_state=123)
+    rf = RandomForestClassifier(max_depth=4, random_state=123)
     rf.fit(train_X,train_y)
 
     # print result
@@ -95,19 +81,20 @@ def get_knn(train_X, validate_X, train_y, validate_y):
     '''get KNN accuracy on train and validate data'''
 
     # create model object and fit it to the training data
-    knn = KNeighborsClassifier(n_neighbors=25, weights='uniform')
+    knn = KNeighborsClassifier(n_neighbors=5, weights='uniform')
     knn.fit(train_X, train_y)
 
     # print results
     print(f"Accuracy of Logistic Regression on train is {knn.score(train_X, train_y)}")
     print(f"Accuracy of Logistic Regression on validate is {knn.score(validate_X, validate_y)}")
 
-def get_tree_test(train_X, test_X, train_y, test_y):
-    '''get decision tree accuracy on train and validate data'''
-    
-    # create model object and fit it to the training data
-    clf = DecisionTreeClassifier(max_depth=5, random_state=123)
-    clf = clf.fit(train_X, train_y)
+def get_reg_test(train_X, test_X, train_y, test_y):
+    '''get logistic regression accuracy on train and validate data'''
 
-    # get model accuracy for Decision Tree on test
-    print(f"Accuracy of Decision Tree on test data is {clf.score(test_X, test_y)}")
+    # create model object and fit it to the training data
+    logit = LogisticRegression(solver='liblinear')
+    logit.fit(train_X, train_y)
+
+    # print result
+    print(f"Accuracy of Logistic Regression on test is {logit.score(test_X, test_y)}")
+    
