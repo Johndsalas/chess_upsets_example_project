@@ -3,7 +3,7 @@ import seaborn as sns
 import pandas as pd
 from scipy import stats
 
-#################################################Exploration Data Visuals and Satatistical tests######################################################## 
+################################################# exploration data visuals and satatistical tests ######################################################## 
 
 def get_pie_upsets(train):
     '''get pie chart for percent of upsets'''

@@ -9,7 +9,7 @@ import re
 from sklearn.model_selection import train_test_split
 import sklearn.preprocessing
 
-#################################################################Acquire Main Function#################################################################
+################################################################# acquire main function#################################################################
 
 def wrangle_chess_data(reprep = False):
     ''' Aquires and Prepares data for project'''
@@ -46,21 +46,25 @@ def wrangle_chess_data(reprep = False):
 ####################################Trian Validate Test Split#######################################################################
 
 def split_my_data(df):
-    '''Splits data into train, validate, and test data'''
+    '''Splits data and returns a train, validate, and test dataframe'''
 
+    # split df into train_validate and test
     train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify=df.upset)
 
+    # split train_validate into train and validate
     train, validate =  train_test_split(train_validate, test_size=.3, random_state=123, stratify=train_validate.upset)
 
+    # reset index for train validate and test
     train.reset_index(drop=True, inplace=True)
     validate.reset_index(drop=True, inplace=True)
     test.reset_index(drop=True, inplace=True)
 
     return train, validate, test
 
-######################################################Scaling##########################################################################
+###################################################### scaling #######################################################################################
 
 def scale_data(train, validate, test):
+    "Adds scaled columns to split data"
 
     # Scaling continuous variables
     cols_to_scale = ['rating_difference', 'game_rating']
@@ -97,7 +101,7 @@ def scale_data(train, validate, test):
 
     return train, validate, test
 
-########################################Feature Engineering###########################################################################
+####################################################### feature engineering ###########################################################################
 
 def get_time_block(value):
     '''convert time code to time in minutes'''
@@ -127,6 +131,7 @@ def get_time_block(value):
     else:
 
         return "Other"
+
 
 def add_features(df):
     '''Adds features for exploration'''

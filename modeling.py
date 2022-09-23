@@ -6,6 +6,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 import pandas as pd
 
+################################################################### prepare data for modeling ############################################################
 
 def model_prep(train,validate,test):
     '''Prepare train, validate, and test data for modeling'''
@@ -41,6 +42,10 @@ def model_prep(train,validate,test):
     test_y['upset'] = test_y.upset.apply(lambda value: "upset" if value == True else "non-upset")
 
     return train_X, validate_X, test_X, train_y, validate_y, test_y
+
+
+###################################################### model evaluation on train and validate ##########################################################
+
 
 def get_tree(train_X, validate_X, train_y, validate_y):
     '''get decision tree accuracy on train and validate data'''
@@ -87,6 +92,10 @@ def get_knn(train_X, validate_X, train_y, validate_y):
     # print results
     print(f"Accuracy of Logistic Regression on train is {knn.score(train_X, train_y)}")
     print(f"Accuracy of Logistic Regression on validate is {knn.score(validate_X, validate_y)}")
+
+
+################################################################### model evaluation on test #########################################################
+
 
 def get_reg_test(train_X, test_X, train_y, test_y):
     '''get logistic regression accuracy on train and validate data'''
