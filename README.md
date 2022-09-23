@@ -8,7 +8,7 @@ Chess is widely renowned as one of the most skill intensive games ever invented.
  
 Discover drivers of upsets in chess games played on Lichess.org, and use those drivers to develop a machine learning model to predict whether a given game will end in upset. An upset is defined as a lower rated player defeating a higher rated player. This information could be used to further our understanding of which game elements contribute to or detract from a game’s skill intensity.
  
-# Initial thoughts
+# Initial Thoughts
  
 My initial hypothesis is that drivers of upsets will be elements that either grant an outright advantage to one player or increase the likelihood of players making mistakes.
  
