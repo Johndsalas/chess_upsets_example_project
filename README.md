@@ -34,6 +34,7 @@ My initial hypothesis is that drivers of upsets will be elements that either gra
        * Does a game being rated affect upsets?
        * Does the average rating of both players have an effect on upsets?
        * Does time block affect upsets?
+       * Does a player's choice of opening affect upsets?
       
 * Develop a Model to predict if a chess game will end in an upset
    * Use drivers identified in explore to build predictive models of different types
